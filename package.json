@@ -1,0 +1,17 @@
+{
+  "name": "sequelize-audit-log",
+  "version": "1.1.0",
+  "description": "audit-log-for-sequelize (create, update & delete).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "audit",
+    "log",
+    "sequelize-audit",
+    "sequelize"
+  ],
+  "author": "Shamaru Primera <shamaru001@gmail.com>",
+  "license": "MIT"
+}
