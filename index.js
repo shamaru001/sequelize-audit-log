@@ -1,18 +1,18 @@
 const path = require('path');
 const _ = require('lodash');
 
-module.exports = function (db, saveAuditLog) {
+module.exports = function (db, saveAuditLog, userPk) {
     return (req, res, next) => {
         const { sequelize } = db;
         const hooks = {
             afterCreate: (instance, options) => {
-                saveAuditLog('create', db, instance, options, req)
+                saveAuditLog('create', db, instance, options, req, userPk)
             },
             afterUpdate: (instance, options) => {
-                saveAuditLog('update', db, instance, options, req);
+                saveAuditLog('update', db, instance, options, req, userPk);
             },
             afterBulkDestroy: (instance, options) => {
-                saveAuditLog('delete', db, instance, options, req);
+                saveAuditLog('delete', db, instance, options, req, userPk);
             }
         }
         const model = sequelize['import'](path.join(__dirname, 'audit.js'));

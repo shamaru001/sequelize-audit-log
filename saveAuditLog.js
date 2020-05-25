@@ -1,8 +1,8 @@
-module.exports = function (action, db, model, options, req) {
+module.exports = function (action, db, model, options, req, userPk) {
     const  { Audits } = db;
-    let id = null;
+    let id;
     try {
-        const { id } = req.user;
+        id = req.user.getDataValue(userPk);
     } catch (e) {
         id = null;
     }
@@ -10,7 +10,7 @@ module.exports = function (action, db, model, options, req) {
     try {
         if (action == 'delete') {
             Audits.create({
-                userId: id,
+                user: id || null,
                 actionType: action,
                 table: model.model.name,
                 prevValues: "{}",
@@ -19,7 +19,7 @@ module.exports = function (action, db, model, options, req) {
         }
         else if (!model.dataValues.table) {
             Audits.create({
-                userId: id,
+                user: id,
                 actionType: action,
                 table: model._modelOptions.name.plural,
                 prevValues: JSON.stringify(model._previousDataValues),

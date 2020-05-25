@@ -1,7 +1,7 @@
 
 module.exports = (Sequelize, DataTypes) => {
     const Audit = Sequelize.define('Audits', {
-            userId: {
+            user: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
             },
